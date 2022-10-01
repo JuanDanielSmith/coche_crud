@@ -1,14 +1,17 @@
 const Client = require('pg2');
 
-const  client = new Client({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    db: process.env.DATABASE_NAME
-});
+
 
 function connect(){
-    return  client.connect();
+    return  new Client({
+        host: process.env.DATABASE_HOST,
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        db: process.env.DATABASE_NAME,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
 }
  function connectionEveryShow(){
      return new Promise((resolve,reject)=>{

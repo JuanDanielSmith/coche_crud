@@ -2,8 +2,10 @@ const tableCoches = document.getElementById("tableCars")
 
 let ListCars = [];
 
+const urlBase= "https://coche-crud.herokuapp.com/api/coches";
+
 async function fetchCars(){
-    const car = await fetch("https://coche-crud.herokuapp.com/api/coches");
+    const car = await fetch(urlBase);
     const cars = await car.json();
     ListCars = cars;
     return ListCars;
@@ -42,7 +44,7 @@ async function insertCars(){
     const color = document.getElementById("color").value;
     const tipocombustible = document.getElementById("combustible").value;
     const chapa = document.getElementById("chapa").value;
-    const response = await fetch("https://coche-crud.herokuapp.com/api/coches", {
+    const response = await fetch(urlBase, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -69,7 +71,7 @@ async function updateCars(id){
     const color = document.getElementById("color").value;
     const tipocombustible = document.getElementById("combustible").value;
     const chapa = document.getElementById("chapa").value;
-    const response = await fetch("https://coche-crud.herokuapp.com/api/coches/"+ id, {
+    const response = await fetch(urlBase + "/"+ id, {
         method: 'PUT',
         body: marca, color, tipocombustible, chapa
     })
@@ -85,7 +87,7 @@ async function updateCars(id){
 
 async function deleteCarById(id){
 
-    const response = await fetch("https://coche-crud.herokuapp.com/api/coches/"+ id, {
+    const response = await fetch(urlBase + "/"+ id, {
         method: 'DELETE'
     })
         .then((response) => response.json())
