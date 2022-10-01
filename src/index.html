@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coches</title>
+</head>
+<body>
+<h1>Coches</h1>
+<div>
+    <form>
+        <input type="hidden" id="indice">
+        <div>
+            <label for="marca">Marca del coche</label>
+            <input id="marca" type="text">
+        </div>
+        <br>
+        <div>
+            <label for="color">Color del coche</label>
+            <input id="color" type="text">
+        </div>
+        <br>
+        <div>
+            <label for="combustible">Combustible del coche</label>
+            <input id="combustible" type="text">
+        </div>
+        <br>
+        <div>
+            <label for="chapa">Chapa del coche</label>
+            <input id="chapa" type="text">
+        </div>
+    </form>
+    <div>
+        <button type="button" onclick="insertCars()">Enviar</button>
+    </div>
+</div>
+<br>
+<div>
+    <table>
+        <thead>
+        <th>id</th>
+        <th>Marca</th>
+        <th>Color</th>
+        <th>Tipo de combustible</th>
+        <th>Chapa</th>
+        </thead>
+    <tbody id="tableCars">
+
+    </tbody>
+    </table>
+</div>
+<script src="funciones.js"></script>
+</body>
+</html>
