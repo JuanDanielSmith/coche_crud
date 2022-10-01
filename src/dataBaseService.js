@@ -1,19 +1,21 @@
-var mysql = require('mysql2');
+const { Client } = require('pg2');
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
 function connect(){
-    return  mysql.createConnection({
-        host     : process.env.DATABASE_HOST,
-        user     : process.env.DATABASE_USER,
-        password : process.env.DATABASE_PASSWORD,
-        database : process.env.DATABASE_NAME
-    });
+    return  client.connect();
 }
  function connectionEveryShow(){
      return new Promise((resolve,reject)=>{
          let connection;
        try {
            connection = connect();
-           connection.query('SELECT * FROM COCHE_DB.coche', function (error, results, fields) {
+           connection.query('SELECT * FROM d4qdkacn6rpqlb.coche', function (error, results, fields) {
                if (error) throw error;
                resolve(results);
            });
@@ -35,7 +37,7 @@ function connectionCreateShow(coche){
             connection = connect();
             connection.connect(function(error) {
                 if (error) throw error;
-                     connection.query(`INSERT INTO COCHE_DB.coche(marca,color,tipocombustible,chapa) VALUES ('${coche.marca}', '${coche.color}', '${coche.tipocombustible}', '${coche.chapa}')`, function (error, results) {
+                     connection.query(`INSERT INTO d4qdkacn6rpqlb.coche(marca,color,tipocombustible,chapa) VALUES ('${coche.marca}', '${coche.color}', '${coche.tipocombustible}', '${coche.chapa}')`, function (error, results) {
                 if (error) throw error;
                 resolve(results);
             });
@@ -58,7 +60,7 @@ function connectionDeleteShow(id){
             connection = connect();
             connection.connect(function(error) {
                 if (error) throw error;
-                connection.query(`DELETE FROM COCHE_DB.coche WHERE id = '${id}'`, function (error, results) {
+                connection.query(`DELETE FROM d4qdkacn6rpqlb.coche WHERE id = '${id}'`, function (error, results) {
                     if (error) throw error;
                     resolve(results);
                 });
@@ -82,7 +84,7 @@ function connectionUpdateShow(coche){
             connection = connect();
             connection.connect(function(error) {
                 if (error) throw error;
-                let query = "UPDATE COCHE_DB.coche SET marca = ?, color = ?, tipocombustible = ?, chapa = ? WHERE id = ?"
+                let query = "UPDATE d4qdkacn6rpqlb.coche SET marca = ?, color = ?, tipocombustible = ?, chapa = ? WHERE id = ?"
                 connection.query(query,[coche.marca, coche.color, coche.tipoCombustible, coche.chapa, coche.id], function (error, results) {
                     if (error) throw error;
                     resolve(results);
@@ -106,7 +108,7 @@ function getCarById(id){
             connection = connect();
             connection.connect(function(error) {
                 if (error) throw error;
-                connection.query(`select * FROM COCHE_DB.coche WHERE id = '${id}'`, function (error, results) {
+                connection.query(`select * FROM d4qdkacn6rpqlb.coche WHERE id = '${id}'`, function (error, results) {
                     if (error) throw error;
                     resolve(results);
                 });
