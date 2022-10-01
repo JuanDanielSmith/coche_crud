@@ -1,10 +1,10 @@
-const { Client } = require('pg2');
+const Client = require('pg2');
 
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+const  client = new Client({
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    db: process.env.DATABASE_NAME
 });
 
 function connect(){
